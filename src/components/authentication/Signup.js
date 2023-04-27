@@ -46,15 +46,16 @@ const Signup = () => {
       });
       return;
     }
-    console.log(name, email, password);
+    console.log(name, email, password, confirmpassword);
     try {
       const config = {
         headers: {
           "Content-type": "application/json",
+          "Clear-Site-Data": "*",
         },
       };
       const { data } = await axios.post(
-        "/sample  ",
+        "/sample",
         {
           name,
           email,
@@ -62,6 +63,7 @@ const Signup = () => {
         },
         config
       );
+      // console.log(config);
       console.log(data);
       toast({
         title: "Registration Successful",
@@ -88,14 +90,14 @@ const Signup = () => {
 
   return (
     <VStack spacing="5px">
-      <FormControl id="first-name" isRequired>
+      <FormControl className="first-name" isRequired>
         <FormLabel>Name</FormLabel>
         <Input
           placeholder="Enter Your Name"
           onChange={(e) => setName(e.target.value)}
         />
       </FormControl>
-      <FormControl id="email" isRequired>
+      <FormControl className="email" isRequired>
         <FormLabel>Email Address</FormLabel>
         <Input
           type="email"
@@ -104,7 +106,7 @@ const Signup = () => {
         />
       </FormControl>
 
-      <FormControl id="password" isRequired>
+      <FormControl className="password" isRequired>
         <FormLabel>Password</FormLabel>
         <InputGroup size="md">
           <Input
@@ -119,7 +121,7 @@ const Signup = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <FormControl id="password" isRequired>
+      <FormControl id="confirmpassword" isRequired>
         <FormLabel>Confirm Password</FormLabel>
         <InputGroup size="md">
           <Input
@@ -134,21 +136,11 @@ const Signup = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      {/* <FormControl id="pic">
-        <FormLabel>Upload your Picture</FormLabel>
-        <Input
-          type="file"
-          p={1.5}
-          accept="image/*"
-          onChange={(e) => postDetails(e.target.files[0])}
-        />
-      </FormControl> */}
       <Button
         colorScheme="pink"
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
-        //isLoading={picLoading}
       >
         Sign Up
       </Button>

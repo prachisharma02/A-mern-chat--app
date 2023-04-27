@@ -14,6 +14,7 @@ connectDB();
 
 app.use(express.json());
 app.use("/sample", routes);
+app.use("/api/chat", routes);
 app.get("/", (req, res) => {
   res.send("API is running successfully");
 });
