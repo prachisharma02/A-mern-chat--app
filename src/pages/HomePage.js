@@ -1,4 +1,8 @@
 import React from "react";
+import { useEffect } from "react";
+
+import { useHistory } from "react-router-dom";
+
 import {
   Box,
   Container,
@@ -14,6 +18,15 @@ import Login from "../components/authentication/Login";
 import Signup from "../components/authentication/Signup";
 
 const HomePage = () => {
+  const history = useHistory();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (user) history.push("/chats");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history]);
+
   return (
     <Container maxW="xl" centerContent>
       <Box
