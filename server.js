@@ -3,6 +3,8 @@ const express = require("express"); // to import express
 const connectDB = require("./backend/Config/db");
 const dotenv = require("dotenv");
 const routes = require("./backend/Routes/userRouter");
+const chatroutes = require("./backend/Routes/chatRouter");
+const messageroutes = require("./backend/Routes/messageroutes");
 const {
   notFound,
   errorHandler,
@@ -13,11 +15,13 @@ dotenv.config();
 connectDB();
 
 app.use(express.json());
-app.use("/sample", routes);
-app.use("/api/chat", routes);
+
 app.get("/", (req, res) => {
   res.send("API is running successfully");
 });
+app.use("/sample", routes);
+app.use("/api/chat", chatroutes);
+app.use("/api/message", messageroutes);
 
 app.use(notFound);
 app.use(errorHandler);

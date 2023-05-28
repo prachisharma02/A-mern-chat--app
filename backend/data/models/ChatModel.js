@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const chatModel = mongoose.schema(
+var chatModel = mongoose.Schema(
   //defining schema
   {
     chatName: { type: String, trim: true }, //chat is of type string and trim always true as to remove extra space

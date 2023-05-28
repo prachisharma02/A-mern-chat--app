@@ -2,7 +2,7 @@ import React from "react";
 
 import { ViewIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/button";
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, Image, Text } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 
 import {
@@ -28,23 +28,44 @@ const ProfileModal = ({ user, children }) => {
           onClick={onOpen}
         />
       )}
-      <IconButton
-        display={{ base: "flex" }}
-        icon={<ViewIcon />}
-        onClick={onOpen}
-      />
-      <Modal isOpen={isOpen} onClose={onClose}>
+
+      <Modal size="sm" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+        <ModalContent h="410px">
+          <ModalHeader
+            fontSize="20px"
+            fontFamily="Work sans"
+            d="flex"
+            justifyContent="center"
+          >
+            {user.name}
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>prachiiiiiiiiiiiii</ModalBody>
+          <ModalBody
+            d="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Image
+              borderRadius="full"
+              boxSize="50px"
+              src={user.pic}
+              alt={user.name}
+            />
+            <Text
+              fontSize={{ base: "20px", md: "25px" }}
+              fontFamily="Work sans"
+            >
+              Email: {user.email}
+            </Text>
+          </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button colorScheme="pink" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            {/* <Button variant="ghost">Secondary Action</Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

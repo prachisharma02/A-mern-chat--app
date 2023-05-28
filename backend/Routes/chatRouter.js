@@ -6,11 +6,11 @@ const {
   removeFromGroup,
   addToGroup,
   renameGroup,
-} = require("../controllers/chatControllers");
+} = require("../controllers/chatController");
 const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
-
+//only user who are logged in can access chat
 router.route("/").post(protect, accessChat);
 router.route("/").get(protect, fetchChats);
 //router.route("/group").post(protect, createGroupChat);

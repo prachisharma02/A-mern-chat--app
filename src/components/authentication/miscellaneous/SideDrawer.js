@@ -36,10 +36,10 @@ function SideDrawer() {
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState(false);
-  const [chats, setChats] = useState();
-  const [selectedChat, setSelectedChat] = useState();
+  //const [chats, setChats] = ChatState();
+  //const [selectedChat, setSelectedChat] = useState();
 
-  const { user } = ChatState();
+  const { user, setSelectedChat, chats, setChats } = ChatState();
   const history = useHistory();
   const toast = useToast();
 
@@ -97,7 +97,7 @@ function SideDrawer() {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`/api/chat`, { userId }, config);
+      const { data } = await axios.post("/api/chat", { userId }, config);
 
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat(data);
@@ -152,7 +152,10 @@ function SideDrawer() {
               />
             </MenuButton>
             <MenuList>
-              <ProfileModal></ProfileModal>
+              <MenuItem>
+                view profile
+                <ProfileModal user={user}></ProfileModal>
+              </MenuItem>
 
               <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
